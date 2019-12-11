@@ -3,12 +3,23 @@
         <span (click)="toggleModalClicked()">&times;</span>
         <div class="main-modal">
             <div>
-                <img [src]="book.volumeInfo.imageLinks.thumbnail" alt="" />
+                <img *ngIf="book.volumeInfo.imageLinks" [src]="book.volumeInfo.imageLinks.thumbnail" alt="" />
             </div>
             <div class="main-content">
-                <p class="title">{{ book.volumeInfo.title }}</p>
+                <p class="title">
+                    <span class="bold">Title</span> {{ book.volumeInfo.title }}
+                </p>
                 <p *ngIf="book.volumeInfo.description">
-                    {{ book.volumeInfo.description | slice: 0:500 }}...
+                    <span class="bold">Description</span> {{ book.volumeInfo.description | slice: 0:500 }}...
+                </p>
+                <p *ngIf="book.volumeInfo.authors">
+                    <span class="bold">Author</span> {{ book.volumeInfo.authors[0] }}
+                </p>
+                <p *ngIf="book.volumeInfo.categories">
+                    <span class="bold">Categorie</span> {{ book.volumeInfo.categories[0] }}
+                </p>
+                <p *ngIf="book.volumeInfo.publishedDate">
+                    <span class="bold">Published Date</span> {{ book.volumeInfo.publishedDate }}
                 </p>
             </div>
         </div>

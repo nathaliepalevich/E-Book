@@ -1,7 +1,17 @@
-<div class="search-page">
+<div class="main-container-global">
     <mat-form-field class="example-form-field">
         <input matInput type="text" id="textInput" class="search-input" [(ngModel)]="searchInput" placeholder="Search books..." (keyup)="results$.next($event)" autofocus autocomplete="false" />
     </mat-form-field>
-    <mat-spinner *ngIf="isLoading"></mat-spinner>
-    <book-list [books]="books"></book-list>
+    <div *ngIf="!isNoRes; else elseBlock" class="spinner-container">
+        <mat-spinner *ngIf="isLoading"></mat-spinner>
+        <book-list [books]="
+        books | paginate: { itemsPerPage: 4, currentPage: p, totalItems: 20 }
+      "></book-list>
+        <pagination-controls *ngIf="books" class="my-pagination" (pageChange)="flipPage((p = $event))"></pagination-controls>
+    </div>
+    <ng-template #elseBlock>
+        <div>
+            <h2>No Books Availeable</h2>
+        </div>
+    </ng-template>
 </div>

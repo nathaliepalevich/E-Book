@@ -10,7 +10,7 @@ import { BookService } from "../../services/book-service/book.service";
   templateUrl: "./wishlist.component.html",
   styleUrls: ["./wishlist.component.scss"]
 })
-export class WishlistComponent implements OnInit, OnDestroy {
+export class WishlistComponent implements OnInit {
   books: Item[] = [];
   user: string;
   wishListBooks: Item[] = [];
@@ -21,6 +21,7 @@ export class WishlistComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
+    this.bookService.getWishListBooks();
     this.bookService.wishListBooks$.subscribe(wishListBooks => {
       this.wishListBooks = wishListBooks;
     });
@@ -32,5 +33,4 @@ export class WishlistComponent implements OnInit, OnDestroy {
       return;
     }
   }
-  ngOnDestroy() {}
 }

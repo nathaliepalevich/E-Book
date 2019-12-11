@@ -51,6 +51,6 @@ export class BookDetailsComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.wishlistSubscription.unsubscribe();
+    // this.wishlistSubscription.unsubscribe();
   }
 }

@@ -1,11 +1,7 @@
 <div class="book-list">
     <div>
         <ul *ngIf="books">
-            <book-preview *ngFor="
-          let book of books | paginate: { itemsPerPage: 4, currentPage: p }
-        " [book]="book">
-            </book-preview>
+            <book-preview *ngFor="let book of books" [book]="book"> </book-preview>
         </ul>
     </div>
 </div>
-<pagination-controls *ngIf="books" class="my-pagination" (pageChange)="p = $event"></pagination-controls>

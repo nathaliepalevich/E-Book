@@ -9,16 +9,30 @@ import { UtilService } from "../util-service/util.service";
   providedIn: "root"
 })
 export class BookService {
-  private bookUrl = "https://www.googleapis.com/books/v1/volumes?q=";
+  startIndex$ = new BehaviorSubject<number>(0);
+
   wishlist_key: string = "USER_WISHLIST";
   currSearchRes_key: string = "Curr_Search_Res";
   wishListBooks$ = new BehaviorSubject<Item[]>([]);
   wishlistBooks: Item[];
+  startIndex: number = 0;
+  serchTerm: string;
   constructor(private http: HttpClient, private utilService: UtilService) {}
 
-  getbooks(serchTerm = ""): Observable<Book[]> {
-    return this.http.get<Book[]>(
-      `${this.bookUrl}${serchTerm}''&startIndex=0&maxResults=20&langRestrict=en`
+  flipPage(pageNum) {
+    const page: object = { 1: 0, 2: 4, 3: 8, 4: 12, 5: 15 };
+    for (const key in page) {
+      if (pageNum === +key) {
+        this.startIndex = page[key];
+        break;
+      }
+    }
+    this.startIndex$.next(pageNum);
+  }
+
+  getbooks(serchTerm = ""): Observable<any> {
+    return this.http.get<any>(
+      `https://www.googleapis.com/books/v1/volumes?q=intitle:${serchTerm}''&startIndex=${this.startIndex}&maxResults=4&projection=full&orderBy=newest`
     );
   }
   getWishListBooks() {

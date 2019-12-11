@@ -2,9 +2,9 @@
     <mat-card class="example-card">
         <mat-card-header>
             <mat-card-title>{{ book.volumeInfo.title | slice: 0:40 }}</mat-card-title>
-            <!-- <mat-card-subtitle>Dog Breed</mat-card-subtitle> -->
+            <mat-card-subtitle>{{ book.volumeInfo.authors[0] }}</mat-card-subtitle>
         </mat-card-header>
-        <img mat-card-image [src]="book.volumeInfo.imageLinks.thumbnail" alt="book image" />
+        <img mat-card-image *ngIf="book.volumeInfo.imageLinks" [src]="book.volumeInfo.imageLinks.thumbnail" alt="book image" />
 
         <mat-card-actions>
             <button mat-stroked-button color="primary" (click)="toggleModal$.next()">

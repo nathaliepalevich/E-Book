@@ -17,6 +17,7 @@ export class HomeComponent implements OnInit {
     this.router.navigateByUrl(`/search`);
   }
   ngOnInit() {
+    this.userService.getUser();
     this.userService.user$.subscribe(user => {
       this.user = user;
     });

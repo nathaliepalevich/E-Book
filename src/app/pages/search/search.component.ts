@@ -19,6 +19,9 @@ export class SearchComponent implements OnInit, OnDestroy {
   isLoading: boolean = true;
   results$: Subject<any> = new Subject<any>();
 
+  val;
+  p: number = 1;
+  isNoRes: boolean = false;
   constructor(
     private bookService: BookService,
     private userService: UserService,
@@ -26,6 +29,7 @@ export class SearchComponent implements OnInit, OnDestroy {
   ) {}
 
   searchBooks(value) {
+    this.val = value;
     this.isLoading = true;
     this.bookService
       .getbooks(value)
@@ -34,6 +38,11 @@ export class SearchComponent implements OnInit, OnDestroy {
         this.isLoading = false;
         this.books = books;
       });
+  }
+
+  flipPage(pageNum) {
+    this.bookService.flipPage(pageNum);
+    this.searchBooks(this.val);
   }
 
   ngOnInit() {
@@ -49,12 +58,17 @@ export class SearchComponent implements OnInit, OnDestroy {
     this.results$
       .pipe(
         debounceTime(500),
-        map(keyboardEvent => keyboardEvent.target.value),
+        map(keyboardEvent => {
+          this.val = keyboardEvent.target.value;
+          this.p = 1;
+          return keyboardEvent.target.value;
+        }),
         switchMap(searchTerm => this.bookService.getbooks(searchTerm))
       )
       .subscribe(results => {
         this.books = results.items;
-        console.log("#####", this.books);
+        if (!this.books) this.isNoRes = true;
+        else this.isNoRes = false;
       });
   }
 

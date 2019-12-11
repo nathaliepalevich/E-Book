@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from "@angular/core";
-import { Book } from "src/app/models/book";
+import { Item } from "../../../models/book";
 
 @Component({
   selector: "book-list",
@@ -7,8 +7,7 @@ import { Book } from "src/app/models/book";
   styleUrls: ["./book-list.component.scss"]
 })
 export class BookListComponent implements OnInit {
-  @Input() books: Book[];
-  p: number = 1;
+  @Input() books: Item[];
 
   constructor() {}
 

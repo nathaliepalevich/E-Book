@@ -1,21 +1,25 @@
-import { Component, OnInit, Input } from "@angular/core";
+import { Component, OnInit, Input, OnDestroy } from "@angular/core";
 import { Book } from "src/app/models/book";
-import { Subject } from "rxjs";
+import { Subject, Observable, Subscription } from "rxjs";
 
 @Component({
   selector: "book-preview",
   templateUrl: "./book-preview.component.html",
   styleUrls: ["./book-preview.component.scss"]
 })
-export class BookPreviewComponent implements OnInit {
+export class BookPreviewComponent implements OnInit, OnDestroy {
   @Input() book: Book;
   isModalOpen: boolean = false;
   toggleModal$: Subject<boolean> = new Subject<boolean>();
+  // stopSubscription: Subscription;
   constructor() {}
 
   ngOnInit() {
     this.toggleModal$.subscribe(() => {
       this.isModalOpen = !this.isModalOpen;
     });
+  }
+  ngOnDestroy() {
+    // this.stopSubscription.unsubscribe();
   }
 }
