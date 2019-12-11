@@ -10,10 +10,11 @@ import { BookService } from "../../services/book-service/book.service";
   templateUrl: "./wishlist.component.html",
   styleUrls: ["./wishlist.component.scss"]
 })
-export class WishlistComponent implements OnInit {
+export class WishlistComponent implements OnInit, OnDestroy {
   books: Item[] = [];
   user: string;
   wishListBooks: Item[] = [];
+
   constructor(
     private bookService: BookService,
     private userService: UserService,
@@ -33,4 +34,5 @@ export class WishlistComponent implements OnInit {
       return;
     }
   }
+  ngOnDestroy() {}
 }

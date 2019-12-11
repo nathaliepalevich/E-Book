@@ -5,22 +5,3 @@
         justify-content: center;
     }
 }
-
-.my-pagination ::ng-deep .ngx-pagination {
-    bottom: 15px;
-    width: 98%;
-    text-align: center;
-    font-size: 1.3rem;
-    .current {
-        border-bottom: 1px solid chartreuse;
-        background: none;
-        color: black;
-    }
-    a {
-        border-bottom: transparent 1px solid;
-    }
-    a:hover {
-        background: none;
-        border-bottom: chartreuse 1px solid;
-    }
-}

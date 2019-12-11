@@ -11,3 +11,21 @@
 .search-input {
     font-size: 30px;
 }
+
+.my-pagination ::ng-deep .ngx-pagination {
+    bottom: 15px;
+    text-align: center;
+    font-size: 1.3em;
+    .current {
+        border-bottom: 1px solid chartreuse;
+        background: none;
+        color: black;
+    }
+    a {
+        border-bottom: transparent 1px solid;
+    }
+    a:hover {
+        background: none;
+        border-bottom: chartreuse 1px solid;
+    }
+}

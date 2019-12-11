@@ -1,4 +1,4 @@
-import { Injectable } from "@angular/core";
+import { Injectable, OnDestroy } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Observable, BehaviorSubject } from "rxjs";
 
@@ -8,7 +8,7 @@ import { UtilService } from "../util-service/util.service";
 @Injectable({
   providedIn: "root"
 })
-export class BookService {
+export class BookService implements OnDestroy {
   startIndex$ = new BehaviorSubject<number>(0);
 
   wishlist_key: string = "USER_WISHLIST";
@@ -56,5 +56,8 @@ export class BookService {
     this.wishlistBooks.splice(bookIdx, 1);
     this.utilService.saveToStorage(this.wishlist_key, this.wishlistBooks);
     this.wishListBooks$.next(this.wishlistBooks);
+  }
+  ngOnDestroy() {
+    this.wishListBooks$.unsubscribe();
   }
 }

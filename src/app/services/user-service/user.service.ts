@@ -1,10 +1,10 @@
-import { Injectable, OnInit } from "@angular/core";
+import { Injectable, OnInit, OnDestroy } from "@angular/core";
 import { BehaviorSubject } from "rxjs";
 import { UtilService } from "../util-service/util.service";
 @Injectable({
   providedIn: "root"
 })
-export class UserService implements OnInit {
+export class UserService implements OnInit, OnDestroy {
   user$ = new BehaviorSubject<string>("");
   user_key: string = "USER_NAME";
 
@@ -26,5 +26,8 @@ export class UserService implements OnInit {
   logOut() {
     this.user$.next("");
     localStorage.clear();
+  }
+  ngOnDestroy() {
+    this.user$.unsubscribe();
   }
 }

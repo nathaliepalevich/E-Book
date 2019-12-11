@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, OnDestroy } from "@angular/core";
-import { Book } from "src/app/models/book";
+import { Book } from "../../../models/book";
 import { Subject, Observable, Subscription } from "rxjs";
 
 @Component({
@@ -11,15 +11,15 @@ export class BookPreviewComponent implements OnInit, OnDestroy {
   @Input() book: Book;
   isModalOpen: boolean = false;
   toggleModal$: Subject<boolean> = new Subject<boolean>();
-  // stopSubscription: Subscription;
+  stopSubscription: Subscription;
   constructor() {}
 
   ngOnInit() {
-    this.toggleModal$.subscribe(() => {
+    this.stopSubscription = this.toggleModal$.subscribe(() => {
       this.isModalOpen = !this.isModalOpen;
     });
   }
   ngOnDestroy() {
-    // this.stopSubscription.unsubscribe();
+    this.stopSubscription.unsubscribe();
   }
 }

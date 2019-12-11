@@ -6,8 +6,8 @@ import {
   EventEmitter,
   OnDestroy
 } from "@angular/core";
-import { Book, Item } from "src/app/models/book";
-import { BookService } from "src/app/services/book-service/book.service";
+import { Book, Item } from "../../../models/book";
+import { BookService } from "../../../services/book-service/book.service";
 import { Subscription } from "rxjs";
 @Component({
   selector: "app-book-details",
@@ -51,6 +51,6 @@ export class BookDetailsComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    // this.wishlistSubscription.unsubscribe();
+    this.wishlistSubscription.unsubscribe();
   }
 }
