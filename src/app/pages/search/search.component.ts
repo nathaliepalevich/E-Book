@@ -57,7 +57,7 @@ export class SearchComponent implements OnInit, OnDestroy {
 
     this.results$
       .pipe(
-        debounceTime(500),
+        debounceTime(1000),
         map(keyboardEvent => {
           this.val = keyboardEvent.target.value;
           this.p = 1;

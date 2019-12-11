@@ -14,7 +14,7 @@ $E-books-accent: mat-palette($mat-pink, A200, A100, A400);
 // The warn palette is optional (defaults to red).
 $E-books-warn: mat-palette($mat-red);
 // Create the theme object (a Sass map containing all of the palettes).
-$E-books-theme: mat-light-theme( $E-books-primary, $E-books-accent, $E-books-warn);
+$E-books-theme: mat-light-theme($E-books-primary, $E-books-accent, $E-books-warn);
 // Include theme styles for core and each component used in your app.
 // Alternatively, you can import and @include the theme mixins for each component
 // that you are using.
@@ -29,6 +29,11 @@ $E-books-theme: mat-light-theme( $E-books-primary, $E-books-accent, $E-books-war
 body {
     padding: 0;
     margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+    background-image: url("./assets/images/4.jpg");
+    background-position: top;
+    background-repeat: repeat-y;
+    background-size: cover;
 }
 
 ul {
@@ -57,18 +62,8 @@ h4 {
     font-weight: bold;
 }
 
-html,
-body {
+html {
     height: 100%;
-}
-
-body {
-    margin: 0;
-    font-family: Roboto, "Helvetica Neue", sans-serif;
-    background-image: url("./assets/images/4.jpg");
-    background-position: top;
-    background-repeat: no-repeat;
-    background-size: cover;
 }
 
 .main-container-global {

@@ -7,7 +7,7 @@
         <book-list *ngIf="!isLoading" [books]="
         books | paginate: { itemsPerPage: 4, currentPage: p, totalItems: 20 }
       "></book-list>
-        <pagination-controls *ngIf="books && !isLoading" class="my-pagination" (pageChange)="flipPage((p = $event))"></pagination-controls>
+        <pagination-controls *ngIf="books && !isLoading" class="my-pagination" (pageChange)="flipPage((p = $event))" autoHide="true"></pagination-controls>
     </div>
     <ng-template #elseBlock>
         <div>
