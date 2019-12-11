@@ -1,14 +1,15 @@
 import { Component, OnInit, OnDestroy } from "@angular/core";
-import { BookService } from "../../services/book-service/book.service";
-import { Book, Item } from "src/app/models/book";
-import { UserService } from "../../services/user-service/user.service";
 import { Router } from "@angular/router";
 
-import { fromEvent, Subject } from "rxjs";
+import { Subject } from "rxjs";
 import { debounceTime, switchMap, map } from "rxjs/operators";
 
+import { BookService } from "../../services/book-service/book.service";
+import { UserService } from "../../services/user-service/user.service";
+import { Item } from "../../models/book";
+
 @Component({
-  selector: "ebooks-search",
+  selector: "search",
   templateUrl: "./search.component.html",
   styleUrls: ["./search.component.scss"]
 })
@@ -16,7 +17,6 @@ export class SearchComponent implements OnInit, OnDestroy {
   books: Item[] = [];
   user: string;
   isLoading: boolean = true;
-  toDestroy;
   results$: Subject<any> = new Subject<any>();
 
   constructor(
@@ -27,10 +27,13 @@ export class SearchComponent implements OnInit, OnDestroy {
 
   searchBooks(value) {
     this.isLoading = true;
-    this.bookService.getbooks(value).subscribe(books => {
-      this.isLoading = false;
-      this.books = books.items;
-    });
+    this.bookService
+      .getbooks(value)
+      .pipe(map(res => res.items))
+      .subscribe(books => {
+        this.isLoading = false;
+        this.books = books;
+      });
   }
 
   ngOnInit() {
@@ -49,7 +52,7 @@ export class SearchComponent implements OnInit, OnDestroy {
         map(keyboardEvent => keyboardEvent.target.value),
         switchMap(searchTerm => this.bookService.getbooks(searchTerm))
       )
-      .subscribe((results: Book[]) => {
+      .subscribe(results => {
         this.books = results.items;
         console.log("#####", this.books);
       });

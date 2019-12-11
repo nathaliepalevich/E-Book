@@ -1,7 +1,8 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Observable, BehaviorSubject } from "rxjs";
-import { Book, Item } from "src/app/models/book";
+
+import { Book, Item } from "../../models/book";
 import { UtilService } from "../util-service/util.service";
 
 @Injectable({
@@ -23,18 +24,18 @@ export class BookService {
   getWishListBooks() {
     this.wishlistBooks =
       this.utilService.getFromStorage(this.wishlist_key) || [];
-    console.log(this.wishlistBooks);
-
     this.wishListBooks$.next(this.wishlistBooks);
   }
 
   addBook(chosenBook) {
+    this.getWishListBooks();
     this.wishlistBooks.unshift(chosenBook);
     this.utilService.saveToStorage(this.wishlist_key, this.wishlistBooks);
     this.wishListBooks$.next(this.wishlistBooks);
   }
 
   removeBook(chosenBook) {
+    this.getWishListBooks();
     const bookIdx = this.wishlistBooks.findIndex(
       book => book.id === chosenBook.id
     );

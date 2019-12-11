@@ -7,7 +7,6 @@ import {
   OnDestroy
 } from "@angular/core";
 import { Book, Item } from "src/app/models/book";
-import { UtilService } from "../../../services/util-service/util.service";
 import { BookService } from "src/app/services/book-service/book.service";
 import { Subscription } from "rxjs";
 @Component({
@@ -24,20 +23,15 @@ export class BookDetailsComponent implements OnInit, OnDestroy {
   @Output() toggleModal: EventEmitter<null> = new EventEmitter<null>();
 
   wishlistSubscription: Subscription;
-  constructor(
-    private utilService: UtilService,
-    private bookService: BookService
-  ) {}
+  constructor(private bookService: BookService) {}
 
   addToWishlist() {
     this.bookService.addBook(this.book);
-    // this.toggleModalClicked();
-    this.toggleModal.emit();
+    this.toggleModalClicked();
   }
   removeFromWishlist() {
     this.bookService.removeBook(this.book);
-    // this.toggleModalClicked();
-    this.toggleModal.emit();
+    this.toggleModalClicked();
   }
 
   toggleModalClicked() {
@@ -45,17 +39,18 @@ export class BookDetailsComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.bookService.getWishListBooks();
-    this.bookService.wishListBooks$.subscribe(wishListBooks => {
-      this.wishListBooks = wishListBooks ? wishListBooks : [];
-      const bookFromWL = this.wishListBooks.find(savedBook => {
-        return savedBook.id === this.book.id;
-      });
-      this.existInWishlist = bookFromWL ? true : false;
-    });
+    this.wishlistSubscription = this.bookService.wishListBooks$.subscribe(
+      wishListBooks => {
+        this.wishListBooks = wishListBooks ? wishListBooks : [];
+        const bookFromWL = this.wishListBooks.find(savedBook => {
+          return savedBook.id === this.book.id;
+        });
+        this.existInWishlist = bookFromWL ? true : false;
+      }
+    );
   }
 
   ngOnDestroy() {
-    // this.wishlistSubscription.unsubscribe();
+    this.wishlistSubscription.unsubscribe();
   }
 }

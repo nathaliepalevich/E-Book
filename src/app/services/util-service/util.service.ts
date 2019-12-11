@@ -11,8 +11,6 @@ export class UtilService {
   }
 
   getFromStorage(key) {
-    const res = localStorage.getItem(key);
-    const res1 = JSON.parse(res);
-    return res1;
+    return JSON.parse(localStorage.getItem(key));
   }
 }

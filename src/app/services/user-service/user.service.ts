@@ -1,5 +1,5 @@
 import { Injectable, OnInit } from "@angular/core";
-import { BehaviorSubject, Observable } from "rxjs";
+import { BehaviorSubject } from "rxjs";
 import { UtilService } from "../util-service/util.service";
 @Injectable({
   providedIn: "root"

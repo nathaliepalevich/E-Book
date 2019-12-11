@@ -1,9 +1,8 @@
 import { BrowserModule } from "@angular/platform-browser";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { NgModule } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 import { HttpClientModule } from "@angular/common/http";
-
-import { NgxPaginationModule } from "ngx-pagination";
 
 import { MatCardModule } from "@angular/material/card";
 import { MatButtonModule } from "@angular/material/button";
@@ -13,6 +12,8 @@ import { MatIconModule } from "@angular/material/icon";
 import { MatInputModule } from "@angular/material/input";
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { MatSnackBarModule } from "@angular/material/snack-bar";
+
+import { NgxPaginationModule } from "ngx-pagination";
 
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
@@ -24,7 +25,7 @@ import { NavigationComponent } from "./components/navigation/navigation.componen
 import { BookListComponent } from "./components/book-cmp/book-list/book-list.component";
 import { BookPreviewComponent } from "./components/book-cmp/book-preview/book-preview.component";
 import { BookDetailsComponent } from "./components/book-cmp/book-details/book-details.component";
-import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+
 @NgModule({
   declarations: [
     AppComponent,

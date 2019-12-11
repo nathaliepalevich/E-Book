@@ -16,7 +16,6 @@ export class BookPreviewComponent implements OnInit {
   ngOnInit() {
     this.toggleModal$.subscribe(() => {
       this.isModalOpen = !this.isModalOpen;
-      console.log(this.isModalOpen);
     });
   }
 }
