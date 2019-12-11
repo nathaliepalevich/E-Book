@@ -1,0 +1,40 @@
+<mat-toolbar>
+    <div class="mobile-view">
+        <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+      <mat-icon>more_vert</mat-icon>
+    </button>
+        <mat-menu #menu="matMenu">
+            <button mat-menu-item>
+        <a
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
+          routerLink="/"
+          >Home</a
+        >
+      </button>
+            <button mat-menu-item>
+        <a routerLinkActive="active" routerLink="/search">Search</a>
+      </button>
+            <button mat-menu-item>
+        <a routerLinkActive="active" routerLink="/wishlist">Wishlist</a>
+      </button>
+            <button mat-menu-item *ngIf="user">
+        <a routerLink (click)="logout()"> Logout</a>
+      </button>
+        </mat-menu>
+    </div>
+    <nav class="nav-container">
+        <ul>
+            <li>
+                <a routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" routerLink="/">Home</a
+        >
+      </li>
+      <li><a routerLinkActive="active" routerLink="/search">Search</a></li>
+            <li><a routerLinkActive="active" routerLink="/wishlist">Wishlist</a></li>
+            <li *ngIf="user">
+                <a routerLink (click)="logout()"> Logout</a>
+            </li>
+        </ul>
+    </nav>
+    <p *ngIf="user">Welcome {{ user }}</p>
+</mat-toolbar>

@@ -1,0 +1,7 @@
+<div class="search-page">
+    <mat-form-field class="example-form-field">
+        <input matInput type="text" id="textInput" class="search-input" [(ngModel)]="searchInput" placeholder="Search books..." (keyup)="results$.next($event)" autofocus autocomplete="false" />
+    </mat-form-field>
+    <mat-spinner *ngIf="isLoading"></mat-spinner>
+    <book-list [books]="books"></book-list>
+</div>

@@ -1,0 +1,16 @@
+<section class="book-preview">
+    <mat-card class="example-card">
+        <mat-card-header>
+            <mat-card-title>{{ book.volumeInfo.title | slice: 0:40 }}</mat-card-title>
+            <!-- <mat-card-subtitle>Dog Breed</mat-card-subtitle> -->
+        </mat-card-header>
+        <img mat-card-image [src]="book.volumeInfo.imageLinks.thumbnail" alt="book image" />
+
+        <mat-card-actions>
+            <button mat-stroked-button color="primary" (click)="toggleModal$.next()">
+        More Details
+      </button>
+        </mat-card-actions>
+        <app-book-details [book]="book" [isModalOpen]="isModalOpen" (toggleModal)="toggleModal$.next()"></app-book-details>
+    </mat-card>
+</section>

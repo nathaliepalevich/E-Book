@@ -1,0 +1,22 @@
+<div class="home-container">
+    <h2>Welcome to book search</h2>
+
+    <h3>Please signup to continue</h3>
+    <div class="input-btn-container">
+        <div class="input-p-container">
+            <mat-form-field class="example-form-field" matInput>
+                <input matInput type="text" class="signup-input" [(ngModel)]="signupInput" placeholder="Enter User Name" autofocus autocomplete="off" />
+            </mat-form-field>
+            <p *ngIf="!signupInput || signupInput.length < 3">
+                Name must be at least 3 characters long.
+            </p>
+        </div>
+        <button mat-raised-button [disabled]="!signupInput || signupInput.length < 3" type="button" (click)="signup(signupInput)">
+      SignUp
+    </button>
+
+        <!-- <button>
+   
+    </button> -->
+    </div>
+</div>

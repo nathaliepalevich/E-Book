@@ -1,0 +1,30 @@
+<!-- The Modal -->
+<div [ngClass]="{ 'display-block': isModalOpen, 'display-none': !isModalOpen }" class="modal">
+    <!-- Modal content -->
+    <div class="modal-content">
+        <span (click)="toggleModalClicked()">&times;</span>
+        <div class="main-modal">
+            <div>
+                <img [src]="book.volumeInfo.imageLinks.thumbnail" alt="" />
+            </div>
+            <div class="main-content">
+                <p class="title">{{ book.volumeInfo.title }}</p>
+                <p *ngIf="book.volumeInfo.description">
+                    {{ book.volumeInfo.description | slice: 0:500 }}...
+                </p>
+            </div>
+        </div>
+        <div class="action-btn">
+            <button mat-icon-button color="primary" (click)="addToWishlist()" *ngIf="!existInWishlist; else elseBlock">
+        Add to wishlist
+
+        <mat-icon>favorite</mat-icon>
+      </button>
+            <ng-template #elseBlock>
+                <button mat-icon-button color="primary" (click)="removeFromWishlist()">
+          Remove from wishlist
+        </button>
+            </ng-template>
+        </div>
+    </div>
+</div>
