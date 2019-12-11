@@ -16,8 +16,21 @@
     bottom: 15px;
     text-align: center;
     font-size: 1.3em;
+    background: #00000061;
+    .disabled {
+        color: rgb(75, 68, 68);
+    }
+    .ng-star-inserted {
+        font-weight: bold;
+    }
+    ul {
+        margin: 9px;
+    }
+    li {
+        margin: 0;
+    }
     .current {
-        border-bottom: 1px solid chartreuse;
+        border-bottom: 2px solid chartreuse;
         background: none;
         color: black;
     }

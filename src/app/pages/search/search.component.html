@@ -4,10 +4,10 @@
     </mat-form-field>
     <div *ngIf="!isNoRes; else elseBlock" class="spinner-container">
         <mat-spinner *ngIf="isLoading"></mat-spinner>
-        <book-list [books]="
+        <book-list *ngIf="!isLoading" [books]="
         books | paginate: { itemsPerPage: 4, currentPage: p, totalItems: 20 }
       "></book-list>
-        <pagination-controls *ngIf="books" class="my-pagination" (pageChange)="flipPage((p = $event))"></pagination-controls>
+        <pagination-controls *ngIf="books && !isLoading" class="my-pagination" (pageChange)="flipPage((p = $event))"></pagination-controls>
     </div>
     <ng-template #elseBlock>
         <div>

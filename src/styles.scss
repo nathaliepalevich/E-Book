@@ -65,6 +65,10 @@ body {
 body {
     margin: 0;
     font-family: Roboto, "Helvetica Neue", sans-serif;
+    background-image: url("./assets/images/4.jpg");
+    background-position: top;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 .main-container-global {
@@ -73,6 +77,12 @@ body {
     align-items: center;
     width: 70%;
     margin: 0 auto;
+}
+
+@media only screen and (max-width: 650px) {
+    body {
+        background-repeat: repeat-y;
+    }
 }
 
 @font-face {
