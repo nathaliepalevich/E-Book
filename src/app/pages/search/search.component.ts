@@ -18,7 +18,7 @@ export class SearchComponent implements OnInit, OnDestroy {
   user: string;
   isLoading: boolean = true;
   results$: Subject<any> = new Subject<any>();
-
+  totalRes: number;
   val;
   p: number = 1;
   isNoRes: boolean = false;
@@ -66,6 +66,8 @@ export class SearchComponent implements OnInit, OnDestroy {
         switchMap(searchTerm => this.bookService.getbooks(searchTerm))
       )
       .subscribe(results => {
+        this.totalRes = results.totalItems;
+        if (this.totalRes > 20) this.totalRes = 20;
         this.books = results.items;
         if (!this.books) this.isNoRes = true;
         else this.isNoRes = false;

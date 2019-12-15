@@ -2,10 +2,13 @@
     <mat-form-field class="example-form-field">
         <input matInput type="text" id="textInput" class="search-input" [(ngModel)]="searchInput" placeholder="Search books..." (keyup)="results$.next($event)" autofocus autocomplete="false" />
     </mat-form-field>
+    <p>
+        {{observable | async }}
+    </p>
     <div *ngIf="!isNoRes; else elseBlock" class="spinner-container">
         <mat-spinner *ngIf="isLoading"></mat-spinner>
         <book-list *ngIf="!isLoading" [books]="
-        books | paginate: { itemsPerPage: 4, currentPage: p, totalItems: 20 }
+        books | paginate: { itemsPerPage: 4, currentPage: p, totalItems: totalRes }
       "></book-list>
         <pagination-controls *ngIf="books && !isLoading" class="my-pagination" (pageChange)="flipPage((p = $event))" autoHide="true"></pagination-controls>
     </div>
